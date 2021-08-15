@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+    <div class="container">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/product">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/category">Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">Cart(
+              <span id="numCart1">
+                <span id="numCart2">
+                  <%
+                  if(session.cart){%>
+                      <%= session.cart.items.length %>
+                    <%}
+                    else{%>
+                      0
+                  <%}
+                   %>
+                </span>
+              </span>
+            )</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

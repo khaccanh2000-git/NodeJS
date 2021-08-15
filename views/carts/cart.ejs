@@ -1,0 +1,37 @@
+<div class="container cart-content mt-5 ">
+    
+    <table class="table table-hover bg-light ">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+        </tr>
+        
+        <%
+        cart.map(x=>{%>
+            <tr id="tr_info">
+                <td><%=  x.item.name %></td>
+                <td><%=  x.item.price %></td>
+                <td><img src="<%=  x.imageSrc %>" alt="" width="50px"></td>
+                <td>
+                    <div class="edit">
+                        <a href="/cart/reduce/<%= x.id %>" class="reduceCart btn-warning">-</a>
+                        <span id="qty<%= x.id %>"><span id="qty2<%= x.id %>"><%= x.qty %></span></span>
+                        <a href="/cart/increase/<%= x.id %>" class="increaseCart btn-warning" id="<%= x.id %>">+</a>
+                    </div>
+                </td>
+                
+                
+                <td>
+                    <form action="/cart/<%= x.id %>" method="POST" data-id="<%= x.id %>" class="deleteFormCart">
+                        <input type="submit" value="Delete" class="btn btn-danger" >
+                    </form>
+                 </td>
+            </tr>
+        <%})
+        %>
+    </table>
+    <h1 id="total1"><span id="total2">Total:  <%= total %></span></h1>
+</div>
