@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="form-group">
+        <form action="/cart/order" method="POST">
+            <h4>Address</h4>
+            <input required text="text" class="form-control" id="address" placeholder="Enter address" />
+        </form>
+        <%
+            products.forEach(product =>{%> 
+                <div>
+                    <%= product.item.name %>:(<%= product.qty %>)
+                    <span>      :      </span>
+                    <%= product.item.price*product.qty %>
+                </div>
+
+                <%})
+        %>
+    </div>
+    <div class="total">
+        <h1>Total price: <%= total %></h1>
+        <input type="submit" class="btn btn-primary" value="Order" />
+    </div>
+    <a href="/cart/pay" class="btn btn-primary">Pay</a>
+</div>
