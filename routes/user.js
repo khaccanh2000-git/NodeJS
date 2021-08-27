@@ -11,18 +11,19 @@ router.get('/', async(req, res)=>{
 router.get('/register',(req,res)=>{
     res.render("users/register")
 })
-// function check(req,res, next){
-//     if(req.isAuthenticated()){
-//         return next()
-//     }
-//     res.redirect('/user/login')
-// }
-router.get('/profile',(req,res)=>{
+function check(req,res, next){
+    if(req.isAuthenticated()){
+        return next()
+    }
+    res.redirect('/user/login')
+}
+router.get('/profile',check,(req,res)=>{
+
     let value="No name"
     if(req.user){
         value="name: "+req.user.name
     }
-    console.log(value)
+    // console.log(value)
     res.render('users/profile',{value:value})
 })
 // LOGIN
@@ -40,6 +41,7 @@ router.post('/',async(req,res)=>{
         const users=new userModel({
             name: req.body.name,
             email: req.body.email,
+            level:req.body.level,
             password: hashedPassword
         })
         await users.save()
@@ -55,6 +57,7 @@ router.post('/',async(req,res)=>{
 
 router.get('/logout',(req, res) => {
     req.logout()
+    console.log("Logout successful")
     res.redirect('/user/login')
 })
 
@@ -69,10 +72,17 @@ router.delete('/:id', async(req,res)=>{
     }
 })
 
-// router.get('/github',passport.authenticate('github'))
-// router.get('/github/callback',passport.authenticate('github',{
-//     successRedirect:'/user/profile',
-//     failureRedirect:'/user/login',
-//     failureFlash:true
-// }))
+router.get('/github',passport.authenticate('github'))
+router.get('/github/callback',passport.authenticate('github',{
+    successRedirect:'/user/profile',
+    failureRedirect:'/user/login',
+    failureFlash:true
+}))
+
+router.get('/google',passport.authenticate('google',{scope:['profile','email']}))
+router.get('/google/callback',passport.authenticate('google',{
+    successRedirect:'/user/profile',
+    failureRedirect:'/user/login',
+    failureFlash:true
+}))
 module.exports = router

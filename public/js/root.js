@@ -51,7 +51,6 @@ $('.deleteFormCart').on("submit",function (event) {
         type: 'POST',
         data:{},
         success:function(){
-            console.log("delete ok")
             swal("Delete successful!", "continute!", "success");
             $("#total1").load(root+"/cart #total2");
             $(tr_cart_id).empty();

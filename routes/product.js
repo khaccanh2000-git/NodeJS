@@ -1,18 +1,26 @@
 const express=require('express')
 const categoryModel=require('../models/category.model')
 const productModel=require('../models/product.model')
+const userModel=require('../models/user.model')
 const router=express.Router()
+
+function check(req,res, next){
+    if(req.isAuthenticated()){
+        return next()
+    }
+    res.redirect('/user/login')
+}
+
 router.get('/',async(req,res)=>{
     try{
         const products=await productModel.find().populate('category',['name'])
-
         res.render('products/list',{products:products})
     }catch(e){
         console.log(e)
         res.redirect('/')
     }
 })
-router.get('/add',async(req,res)=>{
+router.get('/add',check,async(req,res)=>{
     const product=new productModel()
     const categories=await categoryModel.find()
     res.render('products/add',{product:product,categories:categories})
@@ -39,7 +47,7 @@ router.post('/',async(req,res)=>{
         res.redirect('/')
     }
 })
-router.get('/edit/:id',async(req,res)=>{
+router.get('/edit/:id',check,async(req,res)=>{
     try{
         const categories=await categoryModel.find()
         const product=await productModel.findById(req.params.id)
@@ -65,7 +73,7 @@ router.put('/edit/:id',async(req,res)=>{
         res.redirect('/')
     }
 })
-router.post('/delete/:id',async(req,res)=>{
+router.post('/delete/:id',check,async(req,res)=>{
     try{
         const productDelete=await productModel.findById(req.params.id)
         await productDelete.remove()
@@ -76,5 +84,15 @@ router.post('/delete/:id',async(req,res)=>{
     }
 })
 
-
+router.get('/search', async(req, res) => {
+    const search_name=req.body.name
+    const search_price =req.body.price
+    const products= await productModel.find().populate('category',['name'])
+    console.log(products)
+    const result = products.filter((products) => {
+        return product.category.name.toLowerCase().indexOf(search_name.toLowerCase()) !==-1 || product.price === parseInt(search_price)
+    })
+    // console.log(result)
+    res.render('products/search',{products:result})
+})
 module.exports=router

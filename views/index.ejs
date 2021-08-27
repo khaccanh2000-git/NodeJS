@@ -1,19 +1,24 @@
 <div class="container ">
     <%- include('part/message') %>
+
     <div class="row">
         <%
             products.map(pro=>{%>
-                <div class="col-sm-6 col-md-4">
-                    <div class="product-card">
-                        <div class="img">
-                            <img src="<%=pro.imageSrc %>" alt="">
+                <div class="col-sm-6 col-md-3 mt-10">
+                    <div class="product-list">
+                        <div class="product-card">
+                            <div class="img">
+                                <img src="<%=pro.imageSrc %>" alt="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="content">
-                        <h1><%=pro.name%></h1>
-                        <h4><%=pro.price%></h4>
-                        <h6><%=pro.info%></h6>
-                        <a href="/cart/add/<%= pro.id%>" class=" addToCart btn btn-info">Add to Cart</a>
+                        <div class="content">
+                            <h3><%=pro.name%></h3>
+                            <p><%=pro.price%></p>
+                            <p><%=pro.info%></p>
+                            
+            
+                        </div>
+                        <a href="/cart/add/<%= pro.id%>" class=" addToCart btn btn-info "> <i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng</a>
                     </div>
                 </div>
 

@@ -4,7 +4,7 @@ const router=express.Router()
 router.get('/',async(req,res)=>{
     try{
         const categories=await categoryModel.find()
-        console.log(categories)
+        // console.log(categories)
         res.render('categories/list',{categories:categories})
     }catch(e){
         console.log(e)

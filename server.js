@@ -13,6 +13,7 @@ const flash = require('express-flash')
 const passport=require('passport')
 require('./models/passport.model')(passport)
 const app=express()
+require('dotenv').config()
 
 app.use(flash())
 app.set('view engine', 'ejs')
@@ -21,12 +22,10 @@ app.set('layout','layouts/layout')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false, limit:'10mb' }))
 
-app.use(passport.initialize());
-app.use(passport.session());
 
 const connectFunction=async()=>{
     try{
-        await mongose.connect('mongodb://localhost/bai22',{
+        await mongose.connect(process.env.STR_CONNECT,{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
@@ -52,6 +51,8 @@ app.use((req,res, next)=>{
 }
 
 )
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(methodOverride('_method'))
 app.use('/',indexRouter)
 app.use('/category',categoryRouter)

@@ -1,22 +1,31 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
     <div class="container">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <img src="../../public/img/logo.jpg " width="100px" alt="">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/product">Products</a>
+            <a class="nav-link" href="/product">Sản phẩm</a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link" href="/category">Danh mục sản phẩm</a>
+          </li>
+          <li>
+            <form action="/product/search" class="d-flex me-3"  method="get">
+              <input class="form-control me-2" type="text" name="name" placeholder="Search by name">
+              <input class="form-control me-2" type="text" name="price" placeholder="Search price">
+              <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+            </form>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/category">Category</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cart">Cart(
+            <a class="nav-link" href="/cart">Giỏ hàng (
               <span id="numCart1">
                 <span id="numCart2">
                   <%
@@ -31,20 +40,25 @@
               </span>
             )</a>
           </li>
+            <a class="nav-link" href="/order">Lịch sử giỏ hàng</a>
+          <li>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              User
+                User
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/user/login">Login</a></li>
-              <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
-              <li><a class="dropdown-item" href="/user/register">Regiter</a></li>
+              <li><a class="dropdown-item" href="/user/login">Đăng nhập</a></li>
+              <li><a class="dropdown-item" href="/user/profile">Trang cá nhân</a></li>
+              <li><a class="dropdown-item" href="/user/register">Đăng ký</a></li>
               
-              <li><a class="dropdown-item" href="/user">List user</a></li>
-              <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+              <li><a class="dropdown-item" href="/user">Danh sách tài khoản</a></li>
+              <li><a class="dropdown-item" href="/user/logout">Đăng xuất</a></li>
             </ul>
           </li>
+          
         </ul>
       </div>
+      
     </div>
   </nav>

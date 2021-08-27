@@ -4,6 +4,12 @@ const cartModel=require('../models/cart.model')
 const orderModel=require('../models/order.model')
 const router=express.Router()
 
+function check(req,res, next){
+    if(req.isAuthenticated()){
+        return next()
+    }
+    res.redirect('/user/login')
+}
 router.get('/',async(req,res)=>{
     try{
         // req.session.cart=null
@@ -19,6 +25,7 @@ router.get('/',async(req,res)=>{
         res.redirect('/')
     }
 })
+
 router.get('/add/:id',async(req,res)=>{
     try{
         const product=await productModel.findById(req.params.id)
@@ -48,7 +55,7 @@ router.delete('/:id',async(req,res)=>{
     
 })
 
-router.get('/checkout',(req,res)=>{
+router.get('/checkout',check,(req,res)=>{
     if(!req.session.cart)
     {
         res.redirect('/')
@@ -68,6 +75,7 @@ router.post('/order',async(req,res)=>{
         })
         req.session.cart=null
         req.flash("success","Order successfully")
+        console.log(order)
         await order.save()
         res.redirect('/')
     }
