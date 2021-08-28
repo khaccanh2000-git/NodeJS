@@ -85,14 +85,13 @@ router.post('/delete/:id',check,async(req,res)=>{
 })
 
 router.get('/search', async(req, res) => {
-    const search_name=req.body.name
-    const search_price =req.body.price
+    const search_name=req.query.name
+    const search_price =req.query.price
     const products= await productModel.find().populate('category',['name'])
-    console.log(products)
-    const result = products.filter((products) => {
+    
+    const result = products.filter((product) => {
         return product.category.name.toLowerCase().indexOf(search_name.toLowerCase()) !==-1 || product.price === parseInt(search_price)
     })
-    // console.log(result)
     res.render('products/search',{products:result})
 })
 module.exports=router

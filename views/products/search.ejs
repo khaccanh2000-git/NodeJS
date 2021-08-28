@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row mt-3">
+        <%
+            products.map(pro=>{%>
+                <div class="col-sm-6 col-md-3 mt-10">
+                    <div class="product-list">
+                        <div class="product-card">
+                            <div class="img">
+                                <img src="<%=pro.imageSrc %>" alt="">
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3><%=pro.name%></h3>
+                            <p><%=pro.price%></p>
+                            <p><%=pro.info%></p>
+                            
+            
+                        </div>
+                        <a href="/cart/add/<%= pro.id%>" class=" addToCart btn btn-info "> <i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng</a>
+                    </div>
+                </div>
+    
+            <%})
+        %>
+    </div>
+</div>
